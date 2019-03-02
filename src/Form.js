@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import MenuIcon from '@material-ui/icons/Menu';
 
 const styles = theme => ({
 	root: {
@@ -199,6 +199,7 @@ class Form extends Component {
 					<AppBar position="static">
 						<Toolbar>
 							<IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+							<MenuIcon />
 							</IconButton>
 							<Typography variant="h6" color="inherit" className={classes.grow}>
 								メンバー登録
