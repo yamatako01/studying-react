@@ -145,7 +145,7 @@ class Form extends Component {
 			alert("名前が未入力です");
 			return;
 		}
-		// 年齢のバリデーション
+		// 年齢のバリデーシ
 		if ( !age || age.length === 0 ) {
 			alert("年齢が未入力です");
 			return;
@@ -283,7 +283,9 @@ class Form extends Component {
 						id="birthDay"
 						label="生年月日"
 						type="date"
+						onChange={(event) => this.handleChangeBirthDay(event)}
 						defaultValue={this.state.birthDay}
+						value={this.state.birthDay}
 						className={classes.textField}
 						InputLabelProps={{
 							shrink: true,
