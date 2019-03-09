@@ -6,7 +6,17 @@ import './index.css';
 class App extends Component {
 
   state = {
-    posts: []
+    posts: [],
+    selId: null
+  }
+
+  componentDidMount(){
+    if(this.state.selId !== null) {
+      this.refs.ChildComponent.addedStateSet();
+      this.setState({
+        selId:null
+      });
+    }
   }
 
   /** Formが作成した投稿を保存する処理 */
@@ -23,14 +33,38 @@ class App extends Component {
     });
   }
 
+  deletePost(delPost) {
+    this.state.posts.splice(delPost,1);
+    this.setState({
+      posts: this.state.posts
+    });  
+  }
+
+  /** Listで選択した投稿を保存する処理 */
+  changeSelPost(selPost) {
+    // 投稿にidを付与する
+    this.setState({
+      selId:selPost
+    });
+   // this.refs.ChildComponent.addedStateSet();
+    // state内の投稿リストに加える
+    // this.setState({
+    //   posts: [...this.state.posts, newPostWithId]
+    // });
+  }
+
   render() {
     return (
       <div className="App">
         <Form
           onSubmitNewPost={(newPost) => this.saveNewPost(newPost)}
-          posts={this.state.posts} />
+          ref='ChildComponent'
+          posts={this.state.posts}
+          selId={this.state.selId} />
         <hr />
         <List
+          onDeletePost={(delPost) => this.deletePost(delPost)}
+          onChangeSelPost={(selPost) => this.changeSelPost(selPost)}
           posts={this.state.posts} />
       </div>
     );

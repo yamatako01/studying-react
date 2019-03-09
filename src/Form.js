@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
 
 const styles = theme => ({
 	root: {
@@ -72,8 +72,8 @@ const styles = theme => ({
 		float: 'left',
 		marginTop: "16px",
 	},
-  });
-  
+	});
+	
 /** 投稿フォーム */
 class Form extends Component {
 
@@ -145,9 +145,14 @@ class Form extends Component {
 			alert("名前が未入力です");
 			return;
 		}
+		// 年齢のバリデーション
+		if ( !age || age.length === 0 ) {
+			alert("年齢が未入力です");
+			return;
+		}
 
 		// 本文のバリデーション
-		if ( !body || name.body === 0 ) {
+		if ( !body || body.length === 0 ) {
 			alert("本文が未入力です");
 			return;
 		}
@@ -170,11 +175,23 @@ class Form extends Component {
 		});
 	}
 
+	addedStateSet() {
+		console.log(this.props.selId);		
+		this.setState({
+			name: this.props.posts[this.props.selId].name,
+			sex: this.props.posts[this.props.selId].sex,
+			birthDay: this.props.posts[this.props.selId].birthDay,
+			age: this.props.posts[this.props.selId].age,
+			body: this.props.posts[this.props.selId].body,				
+		});
+	}
+
   ajaxJson() {
 		console.log(this.props.posts);
 		const datas = JSON.stringify({
 			datas: this.props.posts
 		});
+		alert(datas);
 		console.log(datas);
 		/*
     fetch('http://localhost:3001/todos', {
@@ -188,8 +205,20 @@ class Form extends Component {
 
 		})
 		*/
+	}
+	componentDidMount() {
+		console.log("コンポーネントが受け取るpropsが変化");
+	}
+	componentWillReceiveProps(){
+    console.log("コンポーネントが受け取るpropsが変化");
+	}
+	shouldComponentUpdate(){
+    console.log("コンポーネントがアップデートされる前1");
+    return true;
   }
- 
+	componentDidUpdate(){
+    console.log("コンポーネントがアップデートされた後")
+  }
 	render() {
 		const { classes } = this.props;
 		return (
@@ -199,6 +228,7 @@ class Form extends Component {
 					<AppBar position="static">
 						<Toolbar>
 							<IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+							{/* <MenuIcon/> */}
 							</IconButton>
 							<Typography variant="h6" color="inherit" className={classes.grow}>
 								メンバー登録
@@ -229,6 +259,7 @@ class Form extends Component {
 							value="1"
 							name="radio-button-sex"
 							aria-label="1"
+							color="primary"
 						/>
 							}
 						label="男性"
