@@ -39,7 +39,8 @@ class List extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <div style={{float:'left',width:'22%'}}>
+        {/* <div style={{float:'left',width:'22%'}}> */}
+        <div>
           <div style={styles.wrapper}>
             <Chip
               avatar={<Avatar>
@@ -55,7 +56,8 @@ class List extends Component {
           {/* <div>名前: {post.name}</div> */}
           {/* <div>年齢: {this.convertAge(post.age)}</div> */}
         </div>
-        <div style={{float:'left',width:'68%'}}>
+        {/* <div style={{float:'left',width:'68%'}}> */}
+        <div>
           <SnackbarContent
             className={classes.snackbar}
             message={post.body}
